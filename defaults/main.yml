@@ -1,0 +1,198 @@
+metrictank_path: "/opt/metrictank"
+
+metrictank_drop_first_chunk: False
+metrictank_chunk_max_stale: "1h"
+metrictank_metric_max_stale: "6h"
+metrictank_gc_interval: "1h"
+metrictank_warm_up_interval: "1h"
+
+metrictank_public_org: 0
+
+#
+# Profiling and logging
+#
+metrictank_block_profile_rate: 0
+metrictank_mem_profile_rate: 524288
+metrictank_proftrigger_freq: "60s"
+metrictank_proftrigger_path: "/tmp"
+metrictank_proftrigger_min_diff: "1h"
+metrictank_proftrigger_heap_thresh: "25000000000"
+metrictank_log_level: "2"
+metrictank_tracing_enabled: False
+metrictank_tracing_addr: localhost:6831
+metrictank_tracing_add_tags: False
+
+#
+# metric data storage in cassandra
+#
+metrictank_cassandra_hosts: "localhost"
+metrictank_cassandra_keyspace: "metrictank"
+metrictank_cassandra_consistency: "one"
+metrictank_cassandra_host_selection_policy: "tokenaware,hostpool-epsilon-greedy"
+metrictank_cassandra_timeout: "1s"
+metrictank_cassandra_read_concurrency: 20
+metrictank_cassandra_write_concurrency: 10
+metrictank_cassandra_read_queue_size: 200000
+metrictank_cassandra_write_queue_size: 100000
+metrictank_cassandra_retries: 0
+metrictank_cassandra_window_factor: 20
+metrictank_cassandra_omit_read_timeout: "60s"
+metrictank_cassandra_cql_protocol_version: 4
+metrictank_cassandra_create_keyspace: True
+metrictank_cassandra_schema_file: "{{ metrictank_path }}/etc/schema-store-cassandra.toml"
+metrictank_cassandra_ssl: False
+metrictank_cassandra_ca_path: "/etc/ssl/ca.pem"
+metrictank_cassandra_host_verification: False
+metrictank_cassandra_auth: False
+metrictank_cassandra_username: "cassandra"
+metrictank_cassandra_password: "cassandra"
+metrictank_cassandra_disable_initial_host_lookup: False
+
+#
+# Retention settings
+#
+metrictank_schemas_file: "{{ metrictank_path }}/etc/storage-schemas.conf"
+metrictank_aggregations_file: "{{ metrictank_path }}/etc/storage-aggregation.conf"
+
+#
+# Instrumentation stats
+#
+metrictank_stats_enable: True
+metrictank_stats_prefix: "metrictank.stats.default.$instance"
+metrictank_stats_addr: "localhost:2003"
+metrictank_stats_interval: 1
+metrictank_stats_buffer_size: 20000
+
+#
+# chunk cache
+#
+metrictank_chunk_cache_max_size: 4294967296
+
+
+#
+# http api
+#
+metrictank_http_listen: ":6060"
+metrictank_http_gzip_enable: True
+metrictank_https_enable: False
+metrictank_https_cert_file: "{{ metrictank_path }}/tls.cert"
+metrictank_https_key_file: "{{ metrictank_path }}/tls.key"
+metrictank_https_max_points_per_req_soft: 1000000
+metrictank_https_max_points_per_req_hard: 20000000
+metrictank_https_multi_tenant: True
+metrictank_fallback_graphite_addr: "http://localhost:8080"
+metrictank_http_log_min_dur: "1min"
+metrictank_time_zone: "UTC"
+metrictank_http_get_targets_concurrency: 20
+metrictank_http_tagdb_default_limit: 100
+metrictank_http_speculation_threshold: 1
+
+#
+# metric data inputs
+#
+metrictank_carbon_enable: False
+metrictank_carbon_listen: ":2003"
+metrictank_carbon_partition: 0
+
+#
+# prometheus input (optional)
+#
+metrictank_prometheus_enable: False
+metrictank_prometheus_listen: ":8000"
+metrictank_prometheus_partition: 0
+
+
+#
+# kafka-mdm input (optional)
+#
+metrictank_kafka_mdm_enable: False
+metrictank_kafka_mdm_org_id: 0
+metrictank_kafka_mdm_brokers: "kafka:9092"
+metrictank_kafka_mdm_topics: "mdm"
+metrictank_kafka_mdm_offset: "last"
+metrictank_kafka_mdm_partitions: "*"
+metrictank_kafka_mdm_offset_commit_interval: "5s"
+metrictank_kafka_mdm_data_dir: ""
+metrictank_kafka_mdm_channel_buffer_size: 1000
+metrictank_kafka_mdm_consumer_fetch_min: 1
+metrictank_kafka_mdm_consumer_fetch_default: 32768
+metrictank_kafka_mdm_consumer_max_wait_time: "1s"
+metrictank_kafka_mdm_consumer_max_precessing_time: "1s"
+metrictank_kafka_mdm_net_max_open_requests: 100
+
+
+#
+# basic clustering settings
+#
+metrictank_cluster_name: "metritank"
+metrictank_cluster_primary_node: True
+metrictank_cluster_max_priority: 10
+metrictank_cluster_peers: ""
+metrictank_cluster_mode: "single"
+metrictank_cluster_min_available_shards: 0
+metrictank_cluster_http_timeout: "60s"
+
+#
+# SWIM clustering settings
+#
+metrictank_swim_use_config: "manual"
+metrictank_swim_bind_addr: "0.0.0.0:7946"
+metrictank_swim_tcp_timeout: "10s"
+metrictank_swim_indirect_checks: 3
+metrictank_swim_retransmit_mult: 4
+metrictank_swim_suspicion_mult: 4
+metrictank_swim_suspicion_max_timeout_mult: 6
+metrictank_swim_push_pull_interval: "30s"
+metrictank_swim_probe_interval: "1s"
+metrictank_swim_probe_timeout: "500ms"
+metrictank_swim_disable_tcp_pings: False
+metrictank_swim_awareness_max_multiplier: 8
+metrictank_swim_gossip_nodes: 3
+metrictank_swim_gossip_interval: "200ms"
+metrictank_swim_gossip_to_the_dead_time: "30s"
+metrictank_swim_enable_compression: True
+metrictank_swim_dns_config_path: "/etc/resolv.conf"
+
+#
+# kafka as transport for clustering messages
+#
+metrictank_kafka_cluster_enable: False
+metrictank_kafka_cluster_brokers: "kafka:9092"
+metrictank_kafka_cluster_topic: metricpersist"
+metrictank_kafka_cluster_partitions: "*"
+metrictank_kafka_cluster_offset: "last"
+metrictank_kafka_cluster_offset_commit_interval: "5s"
+metrictank_kafka_cluster_backlog_process_timeout: "60s"
+metrictank_kafka_cluster_data_dir: ""
+
+#
+# nsq as transport for clustering messages
+#
+metrictank_nsq_cluster_enable: False
+metrictank_nsq_cluster_tcp_address: ""
+metrictank_nsq_cluster_lookupd_http_address: ""
+metrictank_nsq_cluster_topic: "metricpersist"
+metrictank_nsq_cluster_channel: "tank"
+metrictank_nsq_cluster_producer_opt: ""
+metrictank_nsq_cluster_consumer_opt: ""
+metrictank_nsq_cluster_max_in_flight: 200
+
+#
+# in memory, cassandra-backed
+#
+metrictank_cassandra_idx_enable: False
+metrictank_cassandra_idx_connections: 10
+metrictank_cassandra_idx_max_stale: 0
+metrictank_cassandra_idx_prune_interval: "3h"
+metrictank_cassandra_idx_update_cassandra_index: True
+metrictank_cassandra_idx_update_interval: "4h"
+metrictank_cassandra_idx_schema_file: "{{ metrictank_path }}/etc/schema-idx-cassandra.toml"
+
+#
+# in-memory only
+#
+metrictank_memory_idx_enable: True
+metrictank_memory_idx_tag_support: True
+metrictank_memory_idx_tag_query_workers: 50
+metrictank_memory_idx_match_cache_size: 1000
+metrictank_memory_idx_max_prune_lock_time: "100ms"

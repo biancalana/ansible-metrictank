@@ -1,0 +1,43 @@
+- name: OS Specific install
+  include: "{{ item }}"
+  with_first_found:
+    - "install/{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "install/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "install/{{ ansible_distribution | lower }}.yml"
+    - "install/{{ ansible_os_family | lower }}.yml"
+    - "install/{{ ansible_system | lower }}.yml"
+  tags:
+    - metrictank_install
+
+- name: OS Common install
+  include: "install/common.yml"
+  tags:
+    - metrictank_install
+
+- name: OS Specific config
+  include: "{{ item }}"
+  with_first_found:
+    - "configure/{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "configure/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "configure/{{ ansible_distribution | lower }}.yml"
+    - "configure/{{ ansible_os_family | lower }}.yml"
+    - "configure/{{ ansible_system | lower }}.yml"
+  tags:
+    - metrictank_config
+
+- name: OS Common config
+  include: "configure/common.yml"
+  tags:
+    - metrictank_config
+
+
+- name: Restart metrictank
+  service:
+    name: "metrictank"
+    state: restarted
+  when: config.changed
+
+- name: Start metrictank
+  service:
+    name: "metrictank"
+    state: started

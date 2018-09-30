@@ -1,0 +1,19 @@
+- name: systemd service file
+  template:
+    src: "metrictank.service.j2"
+    dest: "/etc/systemd/system/metrictank.service.j2"
+    owner: "root"
+    mode: 0644
+  register: service_file
+  tags:
+    - metrictank
+    - metrictank-config
+
+- name: reload systemd
+  systemd:
+    name: "metrictank.service"
+    daemon_reload: "yes"
+  when: service_file.changed
+  tags:
+    - metrictank
+    - metrictank-config

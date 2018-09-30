@@ -1,0 +1,239 @@
+#
+# Misc
+#
+instance = {{ ansible_host }}
+
+#
+# Data
+#
+drop-first-chunk = {{ metrictank_drop_first_chunk }}
+chunk-max-stale = {{ metrictank_chunk_max_stale }}
+metric-max-stale = {{ metrictank_metric_max_stale }}
+metric-max-stale = {{ metrictank_metric_max_stale }}
+gc-interval = {{ metrictank_gc_interval }}
+warm-up-period = {{ metrictank_warm_up_interval }}
+
+public-org = {{ metrictank_public_org }}
+
+#
+# Profiling and logging
+#
+block-profile-rate = {{ metrictank_block_profile_rate }}
+mem-profile-rate = {{ metrictank_mem_profile_rate }}
+proftrigger-freq = {{ metrictank_proftrigger_freq }}
+proftrigger-path = {{ metrictank_proftrigger_path }}
+proftrigger-min-diff = {{ metrictank_proftrigger_min_diff }}
+proftrigger-heap-thresh = {{ metrictank_proftrigger_heap_thresh }}
+log-level = {{ metrictank_log_level }}
+tracing-enabled = {{ metrictank_tracing_enabled }}
+tracing-addr = {{ metrictank_tracing_addr }}
+tracing-add-tags = {{ metrictank_tracing_add_tags }}
+
+#
+# metric data storage in cassandra
+#
+[cassandra]
+addrs = {{ metrictank_cassandra_hosts }}
+keyspace = {{ metrictank_cassandra_keyspace }}
+consistency = {{ metrictank_cassandra_consistency }}
+host-selection-policy = {{ metrictank_cassandra_host_selection_policy }}
+timeout = {{ metrictank_cassandra_timeout }}
+read-concurrency = {{ metrictank_cassandra_read_concurrency }}
+write-concurrency = {{ metrictank_cassandra_write_concurrency }}
+read-queue-size = {{ metrictank_cassandra_read_queue_size }}
+write-queue-size = {{ metrictank_cassandra_write_queue_size }}
+retries = {{ metrictank_cassandra_retries }}
+window-factor = {{ metrictank_cassandra_window_factor }}
+omit-read-timeout = {{ metrictank_cassandra_omit_read_timeout }}
+cql-protocol-version = {{ metrictank_cassandra_cql_protocol_version }}
+create-keyspace = {{ metrictank_cassandra_create_keyspace }}
+schema-file = {{ metrictank_cassandra_schema_file }}
+ssl = {{ metrictank_cassandra_ssl }}
+ca-path = {{ metrictank_cassandra_ca_path }}
+host-verification = {{ metrictank_cassandra_host_verification }}
+auth = {{ metrictank_cassandra_auth }}
+username = {{ metrictank_cassandra_username }}
+password = {{ metrictank_cassandra_password }}
+disable-initial-host-lookup = {{ metrictank_cassandra_disable_initial_host_lookup }}
+
+#
+# Retention settings
+#
+[retention]
+schemas-file = {{ metrictank_schemas_file }}
+aggregations-file = {{ metrictank_aggregations_file }}
+
+#
+# Instrumentation stats
+#
+[stats]
+enabled = {{ metrictank_stats_enable }}
+prefix = {{ metrictank_stats_prefix }}
+addr = {{ metrictank_stats_addr }}
+interval = {{ metrictank_stats_interval }}
+buffer-size = {{ metrictank_stats_buffer_size }}
+
+#
+# chunk cache
+#
+[chunk-cache]
+max-size = {{ metrictank_chunk_cache_max_size }}
+
+#
+# http api
+#
+[http]
+# tcp address for metrictank to bind to for its HTTP interface
+listen = {{ metrictank_http_listen }}
+gzip = {{ metrictank_http_gzip_enable }}
+ssl = {{ metrictank_https_enable }}
+cert-file = {{ metrictank_https_cert_file }}
+key-file = {{ metrictank_https_key_file }}
+max-points-per-req-soft = {{ metrictank_https_max_points_per_req_soft }}
+max-points-per-req-hard = {{ metrictank_https_max_points_per_req_hard }}
+multi-tenant = {{ metrictank_https_multi_tenant }}
+fallback-graphite-addr = {{ metrictank_fallback_graphite_addr }}
+log-min-dur = {{ metrictank_http_log_min_dur }}
+time-zone = {{ metrictank_time_zone }}
+get-targets-concurrency = {{ metrictank_http_get_targets_concurrency }}
+tagdb-default-limit = {{ metrictank_http_tagdb_default_limit }}
+speculation-threshold = {{ metrictank_http_speculation_threshold }}
+
+#
+# metric data inputs
+#
+[carbon-in]
+enabled = {{ metrictank_carbon_enable }}
+addr = {{ metrictank_carbon_listen }}
+partition = {{ metrictank_carbon_partition }}
+
+#
+# prometheus input (optional)
+#
+[prometheus-in]
+enabled = {{ metrictank_prometheus_enable }}
+addr = {{ metrictank_prometheus_listen }}
+partition = {{ metrictank_prometheus_partition }}
+
+#
+# kafka-mdm input (optional)
+#
+[kafka-mdm-in]
+enabled = {{ metrictank_kafka_mdm_enable }}
+org-id = {{ metrictank_kafka_mdm_org_id }}
+brokers = {{ metrictank_kafka_mdm_brokers }}
+topics = {{ metrictank_kafka_mdm_topics }}
+offset = {{ metrictank_kafka_mdm_offset }}
+partitions = {{ metrictank_kafka_mdm_partitions }}
+offset-commit-interval = {{ metrictank_kafka_mdm_offset_commit_interval }}
+data-dir = {{ metrictank_kafka_mdm_data_dir }}
+channel-buffer-size = {{ metrictank_kafka_mdm_channel_buffer_size }}
+consumer-fetch-min = {{ metrictank_kafka_mdm_consumer_fetch_min }}
+consumer-fetch-default = {{ metrictank_kafka_mdm_consumer_fetch_default }}
+consumer-max-wait-time = {{ metrictank_kafka_mdm_consumer_max_wait_time }}
+consumer-max-processing-time = {{ metrictank_kafka_mdm_consumer_max_precessing_time }}
+net-max-open-requests = {{ metrictank_kafka_mdm_net_max_open_requests }}
+
+#
+# basic clustering settings
+#
+[cluster]
+name = {{ metrictank_cluster_name }}
+primary-node = {{ metrictank_cluster_primary_node }}
+max-priority = {{ metrictank_cluster_max_priority }}
+peers = {{ metrictank_cluster_peers }}
+mode = {{ metrictank_cluster_mode }}
+min-available-shards = {{ metrictank_cluster_min_available_shards }}
+http-timeout = {{ metrictank_cluster_http_timeout }}
+
+#
+# SWIM clustering settings
+#
+[swim]
+use-config = {{ metrictank_swim_use_config }}
+bind-addr = {{ metrictank_swim_bind_addr }}
+tcp-timeout = {{ metrictank_swim_tcp_timeout }}
+indirect-checks = {{ metrictank_swim_indirect_checks }}
+retransmit-mult = {{ metrictank_swim_retransmit_mult }}
+suspicion-multi = {{ metrictank_swim_suspicion_mult }}
+suspicion-max-timeout-mult = {{ metrictank_swim_suspicion_max_timeout_mult }}
+push-pull-interval = {{ metrictank_swim_push_pull_interval }}
+probe-interval = {{ metrictank_swim_probe_interval }}
+probe-timeout = {{ metrictank_swim_probe_timeout }}
+disable-tcp-pings = {{ metrictank_swim_disable_tcp_pings }}
+awareness-max-multiplier = {{ metrictank_swim_awareness_max_multiplier }}
+gossip-nodes = {{ metrictank_swim_gossip_nodes }}
+gossip-interval = {{ metrictank_swim_gossip_interval }}
+gossip-to-the-dead-time = {{ metrictank_swim_gossip_to_the_dead_time }}
+enable-compression = {{ metrictank_swim_enable_compression }}
+dns-config-path = {{ metrictank_swim_dns_config_path }}
+
+#
+# clustering transports for tracking chunk saves between replicated instances
+#
+
+#
+# kafka as transport for clustering messages
+#
+[kafka-cluster]
+enabled = {{ metrictank_kafka_cluster_enable }}
+brokers = {{ metrictank_kafka_cluster_brokers }}
+topic = {{ metrictank_kafka_cluster_topic }}
+partitions = {{ metrictank_kafka_cluster_partitions }}
+offset = {{ metrictank_kafka_cluster_offset }}
+offset-commit-interval = {{ metrictank_kafka_cluster_offset_commit_interval }}
+backlog-process-timeout = {{ metrictank_kafka_cluster_backlog_process_timeout }}
+data-dir = {{ metrictank_kafka_cluster_data_dir }}
+
+#
+# nsq as transport for clustering messages
+#
+[nsq-cluster]
+enabled = {{ metrictank_nsq_cluster_enable }}
+nsqd-tcp-address = {{ metrictank_nsq_cluster_tcp_address }}
+lookupd-http-address = {{ metrictank_nsq_cluster_lookupd_http_address }}
+topic = {{ metrictank_nsq_cluster_topic }}
+channel = {{ metrictank_nsq_cluster_channel }}
+producer-opt = {{ metrictank_nsq_cluster_producer_opt }}
+consumer-opt = {{ metrictank_nsq_cluster_consumer_opt }}
+max-in-flight = {{ metrictank_nsq_cluster_max_in_flight }}
+
+#
+# metric metadata index
+#
+
+#
+# in memory, cassandra-backed
+#
+[cassandra-idx]
+enabled = {{ metrictank_cassandra_idx_enable }}
+keyspace = {{ metrictank_cassandra_keyspace }}
+hosts = {{ metrictank_cassandra_hosts }}
+protocol-version = {{ metrictank_cassandra_cql_protocol_version }}
+consistency = {{ metrictank_cassandra_consistency }}
+timeout = {{ metrictank_cassandra_timeout }}
+num-conns = {{ metrictank_cassandra_idx_connections }}
+write-queue-size = {{ metrictank_cassandra_write_queue_size }}
+max-stale = {{ metrictank_cassandra_idx_max_stale }}
+prune-interval = {{ metrictank_cassandra_idx_prune_interval }}
+update-cassandra-index = {{ metrictank_cassandra_idx_update_cassandra_index }}
+update-interval = {{ metrictank_cassandra_idx_update_interval }}
+ssl = {{ metrictank_cassandra_ssl }}
+ca-path = {{ metrictank_cassandra_ca_path }}
+host-verification = {{ metrictank_cassandra_host_verification }}
+auth = {{ metrictank_cassandra_auth }}
+username = {{ metrictank_cassandra_username }}
+password = {{ metrictank_cassandra_password }}
+create-keyspace = {{ metrictank_cassandra_create_keyspace }}
+schema-file = {{ metrictank_cassandra_idx_schema_file }}
+disable-initial-host-lookup = {{ metrictank_cassandra_disable_initial_host_lookup }}
+
+#
+# in-memory only
+#
+[memory-idx]
+enabled = {{ metrictank_memory_idx_enable }}
+tag-support = {{ metrictank_memory_idx_tag_support }}
+tag-query-workers = {{ metrictank_memory_idx_tag_query_workers }}
+match-cache-size = {{ metrictank_memory_idx_match_cache_size }}
+max-prune-lock-time = {{ metrictank_memory_idx_max_prune_lock_time }}

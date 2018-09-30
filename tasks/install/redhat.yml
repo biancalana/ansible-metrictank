@@ -1,0 +1,6 @@
+- name: install metrictank
+  yum:
+    name: "/tmp/metrictank-0.10.1_22_gcebc212-1.x86_64.rpm"
+  tags:
+    - metrictank
+    - metrictank-install

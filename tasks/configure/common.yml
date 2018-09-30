@@ -1,0 +1,11 @@
+- name: Deploy config file metrictank.ini
+  template:
+    src: "metrictank.ini.j2"
+    dest: "{{ metrictank_path }}/conf/metrictank.ini"
+    owner: "root"
+    mode: 0644
+  register: config
+  notify: restart metrictank
+  tags:
+    - metrictank
+    - metrictank-config

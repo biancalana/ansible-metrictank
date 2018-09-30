@@ -1,0 +1,5 @@
+---
+- name: restart metrictank
+  service:
+    name: "metrictank"
+    state: restarted
