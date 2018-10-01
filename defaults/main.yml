@@ -20,7 +20,7 @@ metrictank_proftrigger_heap_thresh: "25000000000"
 metrictank_log_level: "2"
 metrictank_tracing_enabled: False
 metrictank_tracing_addr: localhost:6831
-metrictank_tracing_add_tags: False
+metrictank_tracing_add_tags: ""
 
 #
 # metric data storage in cassandra
@@ -39,7 +39,7 @@ metrictank_cassandra_window_factor: 20
 metrictank_cassandra_omit_read_timeout: "60s"
 metrictank_cassandra_cql_protocol_version: 4
 metrictank_cassandra_create_keyspace: True
-metrictank_cassandra_schema_file: "{{ metrictank_path }}/etc/schema-store-cassandra.toml"
+metrictank_cassandra_schema_file: "{{ metrictank_path }}/conf/schema-store-cassandra.toml"
 metrictank_cassandra_ssl: False
 metrictank_cassandra_ca_path: "/etc/ssl/ca.pem"
 metrictank_cassandra_host_verification: False
@@ -51,8 +51,8 @@ metrictank_cassandra_disable_initial_host_lookup: False
 #
 # Retention settings
 #
-metrictank_schemas_file: "{{ metrictank_path }}/etc/storage-schemas.conf"
-metrictank_aggregations_file: "{{ metrictank_path }}/etc/storage-aggregation.conf"
+metrictank_schemas_file: "{{ metrictank_path }}/conf/storage-schemas.conf"
+metrictank_aggregations_file: "{{ metrictank_path }}/conf/storage-aggregation.conf"
 
 #
 # Instrumentation stats
@@ -90,7 +90,7 @@ metrictank_http_speculation_threshold: 1
 #
 # metric data inputs
 #
-metrictank_carbon_enable: False
+metrictank_carbon_enable: True
 metrictank_carbon_listen: ":2003"
 metrictank_carbon_partition: 0
 
